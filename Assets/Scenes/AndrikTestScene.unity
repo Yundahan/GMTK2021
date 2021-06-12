@@ -776,6 +776,7 @@ MonoBehaviour:
   playerW: {fileID: 35208165}
   torch: {fileID: 1506745961}
   invh: {fileID: 620609815}
+  camera: {fileID: 519420030}
   movementCD: 0.5
 --- !u!1 &988470046
 GameObject:

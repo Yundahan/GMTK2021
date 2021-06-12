@@ -8,6 +8,7 @@ public class MovementController : MonoBehaviour
 	public TileMovement playerW;
 	public SpriteRenderer torch;
 	public InventoryHandler invh;
+	public CameraBehaviour camera;
 	
 	//scene constants
 	Vector2Int offset = new Vector2Int(0, 0);
@@ -117,6 +118,7 @@ public class MovementController : MonoBehaviour
 			playerW.SetRooted(true);
 			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
 			lastMovement = Time.time;
+			camera.SwitchCamera();
 		}
 		
 		if(!playerS.CanMoveInDirection(direction, ops) && playerW.CanMoveInDirection(direction, ops))//only W can move
@@ -126,6 +128,7 @@ public class MovementController : MonoBehaviour
 			playerS.SetRooted(true);
 			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
 			lastMovement = Time.time;
+			camera.SwitchCamera();
 		}
 		
 		return false;
