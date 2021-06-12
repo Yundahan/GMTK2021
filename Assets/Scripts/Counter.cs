@@ -48,4 +48,9 @@ public class Counter : MonoBehaviour
 		counter--;
 		text.text = counter.ToString();
 	}
+	
+	public void GetCounter()
+	{
+		return counter;
+	}
 }
