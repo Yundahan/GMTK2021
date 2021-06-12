@@ -73,7 +73,9 @@ public class MovementController : MonoBehaviour
 		
 		if(playerS.CanMoveInDirection(direction) && playerW.CanMoveInDirection(direction))
 		{
-			
+			return false;
 		}
+		
+		return false;
 	}
 }
