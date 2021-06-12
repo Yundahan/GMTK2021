@@ -14,8 +14,11 @@ public class TileMovement : MonoBehaviour
 	
 	Vector2Int intPos = new Vector2Int(0, 0);
 	Vector2Int resetPos;
+	Vector2Int direction = new Vector2Int(1, 0);
 	
 	Vector3 velocity;
+	
+	bool rooted = false;
 	
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,11 @@ public class TileMovement : MonoBehaviour
 	
 	public bool CanMoveInDirection(Vector2Int direction)
 	{
+		if(rooted)
+		{
+			return false;
+		}
+		
 		Vector3Int gridPos = new Vector3Int(intPos[0] + direction[0], intPos[1] + direction[1], 0);
 		TileBase tb = tilemap.GetTile(gridPos);
 		
@@ -60,6 +68,7 @@ public class TileMovement : MonoBehaviour
 	
 	public void Move(Vector2Int direction)
 	{
+		TurnInDirection(direction);
 		velocity = new Vector3(v * direction.x, v * direction.y, 0f);
 	}
 	
@@ -100,5 +109,28 @@ public class TileMovement : MonoBehaviour
 	public void SetV(float value)
 	{
 		v = value;
+	}
+	
+	public bool GetRooted()
+	{
+		return rooted;
+	}
+	
+	public void SetRooted(bool value)
+	{
+		rooted = value;
+	}
+	
+	public void TurnInDirection(Vector2Int value)
+	{
+		if(!rooted)
+		{
+			direction = value;
+		}
+	}
+	
+	public Vector2Int GetDirection()
+	{
+		return direction;
 	}
 }

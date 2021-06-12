@@ -7,8 +7,12 @@ public class MovementController : MonoBehaviour
 	public TileMovement playerS;
 	public TileMovement playerW;
 	
+	//scene constants
+	Vector2Int offset = new Vector2Int(21, 0);
 	const float movementCD = 0.5f;
+	
 	float lastMovement;
+	bool connected = true;
 	
 	Vector2Int upVector = new Vector2Int(0, 1);
 	Vector2Int downVector = new Vector2Int(0, -1);
@@ -36,6 +40,16 @@ public class MovementController : MonoBehaviour
 			{
 				playerW.FinishLastMove();
 			}
+		
+			if(!connected)
+			{
+				if(ArePositionsEqual())
+				{
+					connected = true;
+					playerS.SetRooted(false);
+					playerW.SetRooted(false);
+				}
+			}
 			
 			if(Input.GetKey(KeyCode.UpArrow))
 			{
@@ -58,12 +72,14 @@ public class MovementController : MonoBehaviour
 	
 	bool Move(Vector2Int direction)
 	{
-		if(!playerS.CanMoveInDirection(direction) && !playerW.CanMoveInDirection(direction))
+		if(!playerS.CanMoveInDirection(direction) && !playerW.CanMoveInDirection(direction))//both cannot move
 		{
+			playerS.TurnInDirection(direction);
+			playerW.TurnInDirection(direction);
 			return false;
 		}
 		
-		if(playerS.CanMoveInDirection(direction) && playerW.CanMoveInDirection(direction))
+		if(playerS.CanMoveInDirection(direction) && playerW.CanMoveInDirection(direction))//both can move
 		{
 			playerS.Move(direction);
 			playerW.Move(direction);
@@ -71,9 +87,30 @@ public class MovementController : MonoBehaviour
 			return true;
 		}
 		
-		if(playerS.CanMoveInDirection(direction) && playerW.CanMoveInDirection(direction))
+		if(playerS.CanMoveInDirection(direction) && !playerW.CanMoveInDirection(direction))//only S can move
 		{
-			return false;
+			connected = false;
+			playerS.Move(direction);
+			playerW.SetRooted(true);
+			lastMovement = Time.time;
+		}
+		
+		if(!playerS.CanMoveInDirection(direction) && playerW.CanMoveInDirection(direction))//only W can move
+		{
+			connected = false;
+			playerW.Move(direction);
+			playerS.SetRooted(true);
+			lastMovement = Time.time;
+		}
+		
+		return false;
+	}
+	
+	bool ArePositionsEqual()
+	{
+		if(playerS.GetIntPos().x + offset.x == playerW.GetIntPos().x && playerS.GetIntPos().y + offset.y == playerW.GetIntPos().y)
+		{
+			return true;
 		}
 		
 		return false;
