@@ -7,8 +7,8 @@ public class CheckpointController : MonoBehaviour
 	public TileMovement playerS;
 	public TileMovement playerW;
 	
-	Vector2[] cpPositionsS = {new Vector2(2f, 0f), new Vector2(2f, 1f), new Vector2(2f, 2f), new Vector2(2f, 3f)};
-	Vector2[] cpPositionsW = {};
+	Vector2Int[] cpPositionsS = {new Vector2Int(2, 0), new Vector2Int(2, 1), new Vector2Int(2, 2), new Vector2Int(2, 3)};
+	Vector2Int[] cpPositionsW = {};
 	
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class CheckpointController : MonoBehaviour
 			Reset();
 		}
 		
-        foreach(Vector2 cpPosition in cpPositionsS)
+        foreach(Vector2Int cpPosition in cpPositionsS)
 		{
 			if(cpPosition == playerS.GetIntPos())
 			{
@@ -33,7 +33,7 @@ public class CheckpointController : MonoBehaviour
 			}
 		}
 		
-        foreach(Vector2 cpPosition in cpPositionsW)
+        foreach(Vector2Int cpPosition in cpPositionsW)
 		{
 			if(cpPosition == playerW.GetIntPos())
 			{

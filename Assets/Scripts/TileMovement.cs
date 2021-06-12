@@ -2,60 +2,66 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TileMovement : MonoBehaviour
 {
-	const float movementCD = 0.5f;
-	const float v = 2f;//v * movementCD = 1
+	float v;
+	
+	public Tilemap tilemap;
+	
+	String[] impassableTiles = {"wall", "water"};
 	
 	Vector2Int intPos = new Vector2Int(0, 0);
 	Vector2Int resetPos;
 	
-	float lastMovement;
 	Vector3 velocity;
 	
     // Start is called before the first frame update
     void Start()
     {
-		lastMovement = -movementCD;
+		intPos = new Vector2Int((int)(transform.position.x + 0.5f), (int)(transform.position.y + 0.5f));
     }
 
     // Update is called once per frame
     void Update()
     {
-		if(Time.time >= movementCD + lastMovement)//move only if last move is finished
+		if(Input.GetKeyDown(KeyCode.E))
 		{
-			if(velocity.x != 0f || velocity.y != 0f)
-			{
-				velocity = new Vector3(0f, 0f, 0f);
-				transform.position = new Vector3((float)Math.Round(transform.position.x), (float)Math.Round(transform.position.y), 0f);//move was finished, round position to exactly match tiling
-				intPos = new Vector2Int((int)(transform.position.x + 0.5f), (int)(transform.position.y + 0.5f));
-			}
-			
-			if(Input.GetKey(KeyCode.UpArrow))
-			{
-				velocity = new Vector3(0f, v, 0f);
-				lastMovement = Time.time;
-			}
-			else if(Input.GetKey(KeyCode.DownArrow))
-			{
-				velocity = new Vector3(0f, -v, 0f);
-				lastMovement = Time.time;
-			}
-			else if(Input.GetKey(KeyCode.RightArrow))
-			{
-				velocity = new Vector3(v, 0f, 0f);
-				lastMovement = Time.time;
-			}
-			else if(Input.GetKey(KeyCode.LeftArrow))
-			{
-				velocity = new Vector3(-v, 0f, 0f);
-				lastMovement = Time.time;
-			}
+			Vector3Int gridPos = new Vector3Int(intPos[0], intPos[1], 0);
+			Debug.Log(gridPos);
+			TileBase tb = tilemap.GetTile(gridPos);
+			Debug.Log(tb.name);
 		}
 		
 		transform.position += Time.deltaTime * velocity;//positional update
     }
+	
+	public bool CanMoveInDirection(Vector2Int direction)
+	{
+		Vector3Int gridPos = new Vector3Int(intPos[0] + direction[0], intPos[1] + direction[1], 0);
+		TileBase tb = tilemap.GetTile(gridPos);
+		
+		if(tb == null)//this should actually never trigger if wall detection and level layout are done correctly
+		{
+			return false;
+		}
+		
+		foreach(String tile in impassableTiles)
+		{
+			if(tb.name == tile)
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public void Move(Vector2Int direction)
+	{
+		velocity = new Vector3(v * direction.x, v * direction.y, 0f);
+	}
 	
 	public bool IsMoving()
 	{
@@ -67,7 +73,14 @@ public class TileMovement : MonoBehaviour
 		return false;
 	}
 	
-	public Vector2 GetIntPos()
+	public void FinishLastMove()
+	{
+		velocity = new Vector3(0f, 0f, 0f);
+		intPos = new Vector2Int((int)Math.Round(transform.position.x), (int)Math.Round(transform.position.y));
+		transform.position = new Vector3((float)intPos.x, (float)intPos.y, 0f);//move was finished, round position to exactly match tiling
+	}
+	
+	public Vector2Int GetIntPos()
 	{
 		return intPos;
 	}
@@ -82,5 +95,10 @@ public class TileMovement : MonoBehaviour
 		velocity = new Vector3(0f, 0f, 0f);
 		intPos = resetPos;
 		transform.position = new Vector3(intPos.x, intPos.y, 0f);
+	}
+	
+	public void SetV(float value)
+	{
+		v = value;
 	}
 }
