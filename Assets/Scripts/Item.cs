@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		intPos = new Vector2Int((int)(transform.position.x + 0.5f), (int)(transform.position.y + 0.5f));
+		intPos = new Vector2Int((int)Math.Round(transform.position.x), (int)Math.Round(transform.position.y));
 		players = (TileMovement[])FindObjectsOfType(typeof(TileMovement));
     }
 

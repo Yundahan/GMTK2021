@@ -10,7 +10,7 @@ public class TileMovement : MonoBehaviour
 	
 	public Tilemap tilemap;
 	
-	String[] impassableTiles = {"wall", "water", "Flussblop"};
+	String[] impassableTiles = {"wall", "Wasser"};
 	
 	Vector2Int intPos = new Vector2Int(0, 0);
 	Vector2Int resetPos;
@@ -23,7 +23,7 @@ public class TileMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		intPos = new Vector2Int((int)(transform.position.x + 0.5f), (int)(transform.position.y + 0.5f));
+		intPos = new Vector2Int((int)Math.Round(transform.position.x ), (int)Math.Round(transform.position.y));
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class TileMovement : MonoBehaviour
 			return false;
 		}
 		
-		Vector3Int gridPos = new Vector3Int(intPos[0] + direction[0], intPos[1] + direction[1], 0);
+		Vector3Int gridPos = new Vector3Int(intPos.x + direction.x, intPos.y + direction.y, 0);
 		TileBase tb = tilemap.GetTile(gridPos);
 		
 		if(tb == null)//this should actually never trigger if wall detection and level layout are done correctly

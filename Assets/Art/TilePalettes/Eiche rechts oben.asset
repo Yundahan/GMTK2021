@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Eiche rechts oben
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 7eaf5b16137a9a645aadc0f11ebdee6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a64ac0c233bc7f47ae9a40d84329d18, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

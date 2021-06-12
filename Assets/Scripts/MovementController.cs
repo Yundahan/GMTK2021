@@ -151,7 +151,7 @@ public class MovementController : MonoBehaviour
 		}
 	}
 	
-	void UpdateItems()
+	void UpdateItems()//check if a player stands on an item
 	{
 		Item[] items = (Item[])FindObjectsOfType(typeof(Item));
 		
@@ -159,5 +159,10 @@ public class MovementController : MonoBehaviour
 		{
 			item.CheckPlayerPositions();
 		}
+	}
+	
+	public bool GetConnected()
+	{
+		return connected;
 	}
 }
