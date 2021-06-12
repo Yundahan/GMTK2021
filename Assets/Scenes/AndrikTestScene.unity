@@ -450,6 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3c2d96e3df50745a677fce55e3c5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invh: {fileID: 620609815}
   players:
   - {fileID: 642316018}
   - {fileID: 35208164}
@@ -774,6 +775,7 @@ MonoBehaviour:
   playerS: {fileID: 642316019}
   playerW: {fileID: 35208165}
   torch: {fileID: 1506745961}
+  invh: {fileID: 620609815}
   movementCD: 0.5
 --- !u!1 &988470046
 GameObject:

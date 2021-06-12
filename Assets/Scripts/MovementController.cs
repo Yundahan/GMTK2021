@@ -7,6 +7,7 @@ public class MovementController : MonoBehaviour
 	public TileMovement playerS;
 	public TileMovement playerW;
 	public SpriteRenderer torch;
+	public InventoryHandler invh;
 	
 	//scene constants
 	Vector2Int offset = new Vector2Int(0, 0);
@@ -66,7 +67,7 @@ public class MovementController : MonoBehaviour
 				
 				if(ArePositionsEqual())
 				{
-					connected = true;
+					SetConnected(true);
 					playerS.SetRooted(false);
 					playerW.SetRooted(false);
 					torch.enabled = false;
@@ -111,7 +112,7 @@ public class MovementController : MonoBehaviour
 		
 		if(playerS.CanMoveInDirection(direction, ops) && !playerW.CanMoveInDirection(direction, ops))//only S can move
 		{
-			connected = false;
+			SetConnected(false);
 			playerS.Move(direction);
 			playerW.SetRooted(true);
 			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
@@ -120,7 +121,7 @@ public class MovementController : MonoBehaviour
 		
 		if(!playerS.CanMoveInDirection(direction, ops) && playerW.CanMoveInDirection(direction, ops))//only W can move
 		{
-			connected = false;
+			SetConnected(false);
 			playerW.Move(direction);
 			playerS.SetRooted(true);
 			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
@@ -164,5 +165,11 @@ public class MovementController : MonoBehaviour
 	public bool GetConnected()
 	{
 		return connected;
+	}
+	
+	public void SetConnected(bool value)
+	{
+		connected = value;
+		invh.SetConnected(value);
 	}
 }

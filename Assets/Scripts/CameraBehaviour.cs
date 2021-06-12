@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
 {
+	public InventoryHandler invh;
 	public GameObject[] players = new GameObject[2];
+	
 	int currentPlayer = 0;
 	
     // Start is called before the first frame update
@@ -19,8 +21,14 @@ public class CameraBehaviour : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.S))//switch camera from one player to the other
 		{
 			currentPlayer = 1 - currentPlayer;
+			invh.SetCurrentPlayer(currentPlayer);
 		}
 		
 		transform.position = players[currentPlayer].transform.position + new Vector3(0f, 0f, -10f);
     }
+	
+	public int GetCurrentPlayer()
+	{
+		return currentPlayer;
+	}
 }

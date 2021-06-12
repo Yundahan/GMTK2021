@@ -10,7 +10,8 @@ public class InventoryHandler : MonoBehaviour
 	public RectTransform Sinv;
 	public RectTransform Winv;
 	
-	MovementController mc;
+	bool connected = true;
+	String currentPlayer = "PlayerS";
 	
 	List<String> inventoryS = new List<String>();
 	List<String> inventoryW = new List<String>();
@@ -18,13 +19,13 @@ public class InventoryHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		mc = (MovementController)FindObjectOfType(typeof(MovementController));
+		
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+		if(Input.GetKeyDown(KeyCode.Q))
 		{
 			HideInventory("PlayerS");
 		}
@@ -57,6 +58,7 @@ public class InventoryHandler : MonoBehaviour
 		img.sprite = itemSprite;
 		obj.GetComponent<RectTransform>().SetParent(rt);
 		obj.SetActive(true);
+		img.enabled = ((Image)(rt.gameObject.GetComponent<Image>())).enabled;
 		obj.GetComponent<RectTransform>().transform.position = rt.transform.position + new Vector3(0f, 1.5f - offset, 0f);
 		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0.6f);
 		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0.6f);
@@ -71,7 +73,7 @@ public class InventoryHandler : MonoBehaviour
 				return true;
 			}
 			
-			if(mc.GetConnected() && inventoryW.Contains(itemName))
+			if(connected && inventoryW.Contains(itemName))
 			{
 				return true;
 			}
@@ -85,7 +87,7 @@ public class InventoryHandler : MonoBehaviour
 				return true;
 			}
 			
-			if(mc.GetConnected() && inventoryS.Contains(itemName))
+			if(connected && inventoryS.Contains(itemName))
 			{
 				return true;
 			}
@@ -94,6 +96,28 @@ public class InventoryHandler : MonoBehaviour
 		}
 		
 		return false;//this return statement should be unreachable
+	}
+	
+	public void UpdateInventoryVisibility()
+	{
+		if(connected)
+		{
+			ShowInventory("PlayerS");
+			ShowInventory("PlayerW");
+		}
+		else
+		{
+			ShowInventory(currentPlayer);
+			
+			if(currentPlayer == "PlayerS")
+			{
+				HideInventory("PlayerW");
+			}
+			else if(currentPlayer == "PlayerW")
+			{
+				HideInventory("PlayerS");
+			}
+		}
 	}
 	
 	public void HideInventory(String playerName)
@@ -113,11 +137,60 @@ public class InventoryHandler : MonoBehaviour
 			return;
 		}
 		
-		//SpriteRenderer[] srs = (SpriteRenderer[])GetComponentsInChildren(typeof(SpriteRenderer));
+		Image img = (Image)inv.gameObject.GetComponent(typeof(Image));
+		img.enabled = false;
 		
-		//foreach(SpriteRenderer sr in srs)
-		//{
-		//	sr.enabled = false;
-		//}
+		foreach(Transform child in inv.transform)
+		{
+			img = (Image)child.gameObject.GetComponent(typeof(Image));
+			img.enabled = false;
+		}
+	}
+	
+	public void ShowInventory(String playerName)
+	{
+		RectTransform inv;
+		
+		if(playerName == "PlayerS")
+		{
+			inv = Sinv;
+		}
+		else if(playerName == "PlayerW")
+		{
+			inv = Winv;
+		}
+		else
+		{
+			return;
+		}
+		
+		Image img = (Image)inv.gameObject.GetComponent(typeof(Image));
+		img.enabled = true;
+		
+		foreach(Transform child in inv.transform)
+		{
+			img = (Image)child.gameObject.GetComponent(typeof(Image));
+			img.enabled = true;
+		}
+	}
+	
+	public void SetConnected(bool value)
+	{
+		connected = value;
+		UpdateInventoryVisibility();
+	}
+	
+	public void SetCurrentPlayer(int value)
+	{
+		if(value == 0)
+		{
+			currentPlayer = "PlayerS";
+		}
+		else
+		{
+			currentPlayer = "PlayerW";
+		}
+		
+		UpdateInventoryVisibility();
 	}
 }
