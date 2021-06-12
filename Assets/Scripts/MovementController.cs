@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
 	public SpriteRenderer torch;
 	public InventoryHandler invh;
 	public CameraBehaviour camera;
+	public Counter counter;
 	
 	//scene constants
 	Vector2Int offset = new Vector2Int(0, 0);
@@ -72,6 +73,7 @@ public class MovementController : MonoBehaviour
 					playerS.SetRooted(false);
 					playerW.SetRooted(false);
 					torch.enabled = false;
+					counter.EndCounter();
 				}
 			}
 			
@@ -119,6 +121,7 @@ public class MovementController : MonoBehaviour
 			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
 			lastMovement = Time.time;
 			camera.SwitchCamera();
+			counter.ActivateCounter();
 		}
 		
 		if(!playerS.CanMoveInDirection(direction, ops) && playerW.CanMoveInDirection(direction, ops))//only W can move
@@ -129,12 +132,13 @@ public class MovementController : MonoBehaviour
 			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
 			lastMovement = Time.time;
 			camera.SwitchCamera();
+			counter.ActivateCounter();
 		}
 		
 		return false;
 	}
 	
-	bool ArePositionsEqual()
+	bool ArePositionsEqual()//are the players in the same position when account for offset?
 	{
 		if(playerS.GetIntPos().x + offset.x == playerW.GetIntPos().x && playerS.GetIntPos().y + offset.y == playerW.GetIntPos().y)
 		{
@@ -144,7 +148,7 @@ public class MovementController : MonoBehaviour
 		return false;
 	}
 	
-	public void UpdateOps()
+	public void UpdateOps()//update list of occupied positions
 	{
 		ops.Clear();
 		Occupies[] occupiers = (Occupies[])FindObjectsOfType(typeof(Occupies));
