@@ -11,6 +11,17 @@ public class Occupies : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+	
+	public List<Vector2Int> Init()
+	{
 		foreach(Vector2 shift in shifts)
 		{
 			int shiftx = (int)Math.Round(transform.position.x + shift.x);
@@ -19,13 +30,8 @@ public class Occupies : MonoBehaviour
 		}
 		
 		shifts.Clear();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		return occupiedPositions;
+	}
 	
 	public List<Vector2Int> GetOccupiedPositions()
 	{

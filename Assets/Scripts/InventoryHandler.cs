@@ -24,7 +24,10 @@ public class InventoryHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Q))
+		{
+			HideInventory("PlayerS");
+		}
     }
 	
 	public void GiveItem(String playerName, String itemName, Sprite itemSprite)
@@ -110,11 +113,11 @@ public class InventoryHandler : MonoBehaviour
 			return;
 		}
 		
-		SpriteRenderer[] srs = (SpriteRenderer[])GetComponentsInChildren(typeof(SpriteRenderer));
+		//SpriteRenderer[] srs = (SpriteRenderer[])GetComponentsInChildren(typeof(SpriteRenderer));
 		
-		foreach(SpriteRenderer sr in srs)
-		{
-			sr.enabled = false;
-		}
+		//foreach(SpriteRenderer sr in srs)
+		//{
+		//	sr.enabled = false;
+		//}
 	}
 }

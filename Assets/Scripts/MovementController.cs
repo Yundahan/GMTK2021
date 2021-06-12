@@ -147,7 +147,7 @@ public class MovementController : MonoBehaviour
 		
 		foreach(Occupies occupier in occupiers)
 		{
-			ops.AddRange(occupier.GetOccupiedPositions());
+			ops.AddRange(occupier.Init());
 		}
 	}
 	
