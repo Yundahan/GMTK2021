@@ -49,7 +49,7 @@ public class Counter : MonoBehaviour
 		text.text = counter.ToString();
 	}
 	
-	public void GetCounter()
+	public int GetCounter()
 	{
 		return counter;
 	}
