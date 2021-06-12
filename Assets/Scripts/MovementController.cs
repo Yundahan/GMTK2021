@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
 	public TileMovement playerS;
 	public TileMovement playerW;
+	public SpriteRenderer torch;
 	
 	//scene constants
 	Vector2Int offset = new Vector2Int(0, 0);
@@ -28,16 +29,13 @@ public class MovementController : MonoBehaviour
         playerS.SetV(1f / movementCD);
         playerW.SetV(1f / movementCD);
 		
+		UpdateOps();//calculate occupied positions
+		
 		int offsetx = (int)(playerW.transform.position.x - playerS.transform.position.x);//calculate offset between players
 		int offsety = (int)(playerW.transform.position.y - playerS.transform.position.y);
 		offset = new Vector2Int(offsetx, offsety);
 		
-		Occupies[] occupiers = (Occupies[])FindObjectsOfType(typeof(Occupies));
-		
-		foreach(Occupies occupier in occupiers)
-		{
-			ops.AddRange(occupier.GetOccupiedPositions());
-		}
+		torch.enabled = false;
     }
 
     // Update is called once per frame
@@ -45,22 +43,33 @@ public class MovementController : MonoBehaviour
     {
 		if(Time.time >= movementCD + lastMovement)//move only if last move is finished
 		{
-			if(playerS.IsMoving())
+			if(playerS.IsMoving() && playerW.IsMoving())
 			{
 				playerS.FinishLastMove();
+				playerW.FinishLastMove();
+				UpdateItems();
 			}
-			if(playerW.IsMoving())
+			else if(playerS.IsMoving())
+			{
+				playerS.FinishLastMove();
+				UpdateItems();
+			}
+			else if(playerW.IsMoving())
 			{
 				playerW.FinishLastMove();
+				UpdateItems();
 			}
 		
 			if(!connected)
 			{
+				torch.enabled = true;
+				
 				if(ArePositionsEqual())
 				{
 					connected = true;
 					playerS.SetRooted(false);
 					playerW.SetRooted(false);
+					torch.enabled = false;
 				}
 			}
 			
@@ -105,6 +114,7 @@ public class MovementController : MonoBehaviour
 			connected = false;
 			playerS.Move(direction);
 			playerW.SetRooted(true);
+			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
 			lastMovement = Time.time;
 		}
 		
@@ -113,6 +123,7 @@ public class MovementController : MonoBehaviour
 			connected = false;
 			playerW.Move(direction);
 			playerS.SetRooted(true);
+			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
 			lastMovement = Time.time;
 		}
 		
@@ -127,5 +138,26 @@ public class MovementController : MonoBehaviour
 		}
 		
 		return false;
+	}
+	
+	public void UpdateOps()
+	{
+		ops.Clear();
+		Occupies[] occupiers = (Occupies[])FindObjectsOfType(typeof(Occupies));
+		
+		foreach(Occupies occupier in occupiers)
+		{
+			ops.AddRange(occupier.GetOccupiedPositions());
+		}
+	}
+	
+	void UpdateItems()
+	{
+		Item[] items = (Item[])FindObjectsOfType(typeof(Item));
+		
+		foreach(Item item in items)
+		{
+			item.CheckPlayerPositions();
+		}
 	}
 }

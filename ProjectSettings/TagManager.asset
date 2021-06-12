@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Torch
+    uniqueID: 2908715311
+    locked: 0
   - name: Players
     uniqueID: 3827923319
+    locked: 0
+  - name: UI
+    uniqueID: 3673846811
     locked: 0

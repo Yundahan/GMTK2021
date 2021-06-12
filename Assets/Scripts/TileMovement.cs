@@ -29,14 +29,6 @@ public class TileMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if(Input.GetKeyDown(KeyCode.E))
-		{
-			Vector3Int gridPos = new Vector3Int(intPos[0], intPos[1], 0);
-			Debug.Log(gridPos);
-			TileBase tb = tilemap.GetTile(gridPos);
-			Debug.Log(tb.name);
-		}
-		
 		transform.position += Time.deltaTime * velocity;//positional update
     }
 	
