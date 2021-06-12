@@ -827,7 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 2119756516}
   Sinv: {fileID: 595968243}
-  Winv: {fileID: 0}
+  Winv: {fileID: 1082332260}
 --- !u!4 &620609816
 Transform:
   m_ObjectHideFlags: 0
