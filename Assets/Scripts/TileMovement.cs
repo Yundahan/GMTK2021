@@ -10,7 +10,7 @@ public class TileMovement : MonoBehaviour
 	
 	public Tilemap tilemap;
 	
-	String[] impassableTiles = {"wall", "water"};
+	String[] impassableTiles = {"wall", "water", "Flussblop"};
 	
 	Vector2Int intPos = new Vector2Int(0, 0);
 	Vector2Int resetPos;
@@ -40,7 +40,7 @@ public class TileMovement : MonoBehaviour
 		transform.position += Time.deltaTime * velocity;//positional update
     }
 	
-	public bool CanMoveInDirection(Vector2Int direction)
+	public bool CanMoveInDirection(Vector2Int direction, List<Vector2Int> ops)
 	{
 		if(rooted)
 		{
@@ -58,6 +58,14 @@ public class TileMovement : MonoBehaviour
 		foreach(String tile in impassableTiles)
 		{
 			if(tb.name == tile)
+			{
+				return false;
+			}
+		}
+		
+		foreach(Vector2Int position in ops)
+		{
+			if(position == new Vector2Int(gridPos.x, gridPos.y))
 			{
 				return false;
 			}

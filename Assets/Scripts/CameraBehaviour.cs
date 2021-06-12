@@ -19,7 +19,8 @@ public class CameraBehaviour : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.S))//switch camera from one player to the other
 		{
 			currentPlayer = 1 - currentPlayer;
-			transform.position = players[currentPlayer].transform.position + new Vector3(0f, 0f, -10f);
 		}
+		
+		transform.position = players[currentPlayer].transform.position + new Vector3(0f, 0f, -10f);
     }
 }
