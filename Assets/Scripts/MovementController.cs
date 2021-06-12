@@ -8,8 +8,8 @@ public class MovementController : MonoBehaviour
 	public TileMovement playerW;
 	
 	//scene constants
-	Vector2Int offset = new Vector2Int(21, 0);
-	const float movementCD = 0.5f;
+	public Vector2Int offset = new Vector2Int(21, 0);
+	public float movementCD = 0.5f;
 	
 	float lastMovement;
 	bool connected = true;
