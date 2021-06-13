@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class AudioHandler : MonoBehaviour
 {
-	public AudioSource summerMusic;
-	public AudioSource winterMusic;
+	public AudioSource[] sources = new AudioSource[2];//summer is 0, winter is 1
 	
 	public float switchDuration = 1f;
+	public float baseVolume = 1f;
 	float lastSwitch;
-	AudioSource current;
+	int current = 0;
 	
     // Start is called before the first frame update
     void Start()
     {
         lastSwitch = -switchDuration;
-		current = summerMusic;
     }
 
     // Update is called once per frame
@@ -25,19 +24,13 @@ public class AudioHandler : MonoBehaviour
 		
         if(timeSinceSwitch <= switchDuration)
 		{
-			
+			sources[current].volume = timeSinceSwitch;
+			sources[1 - current].volume = 1 - timeSinceSwitch;
 		}
     }
 	
 	public void SwitchTracks()
 	{
-		if(current == SummerMusic)
-		{
-			current = winterMusic;
-		}
-		else
-		{
-			current = summerMusic;
-		}
+		current = 1 - current;
 	}
 }
