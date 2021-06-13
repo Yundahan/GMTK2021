@@ -34,4 +34,12 @@ public class AudioHandler : MonoBehaviour
 		current = 1 - current;
 		lastSwitch = Time.time;
 	}
+	
+	public void Reset(int value)
+	{
+		if(value != current)
+		{
+			SwitchTracks();
+		}
+	}
 }

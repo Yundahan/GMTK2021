@@ -82,6 +82,7 @@ public class CheckpointController : MonoBehaviour
 		invh.UpdateData();
 		counter.UpdateData();
 		ti.UpdateData();
+		camerab.UpdateData();
 		
 		foreach(Item item in items)
 		{
@@ -96,6 +97,7 @@ public class CheckpointController : MonoBehaviour
 		invh.Reset();
 		counter.Reset();
 		ti.Reset();
+		camerab.Reset();
 		counter.EndDCCounter();
 		mc.Reset();
 		

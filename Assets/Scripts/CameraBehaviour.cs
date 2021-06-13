@@ -10,6 +10,7 @@ public class CameraBehaviour : MonoBehaviour
 	AudioHandler ah;
 	
 	int currentPlayer = 0;//0:S, 1:W
+	int resetCurrentPlayer = 0;
 	
     // Start is called before the first frame update
     void Start()
@@ -41,5 +42,16 @@ public class CameraBehaviour : MonoBehaviour
 		currentPlayer = 1 - currentPlayer;
 		invh.SetCurrentPlayer(currentPlayer);
 		ah.SwitchTracks();
+	}
+	
+	public void UpdateData()
+	{
+		resetCurrentPlayer = currentPlayer;
+	}
+	
+	public void Reset()
+	{
+		currentPlayer = resetCurrentPlayer;
+		ah.Reset(currentPlayer);
 	}
 }
