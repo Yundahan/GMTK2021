@@ -7,12 +7,14 @@ public class CameraBehaviour : MonoBehaviour
 	public InventoryHandler invh;
 	public GameObject[] players = new GameObject[2];
 	
+	AudioHandler ah;
+	
 	int currentPlayer = 0;//0:S, 1:W
 	
     // Start is called before the first frame update
     void Start()
     {
-        
+        ah = (AudioHandler)(gameObject.GetComponent<AudioHandler>());
     }
 
     // Update is called once per frame
@@ -38,5 +40,6 @@ public class CameraBehaviour : MonoBehaviour
 		
 		currentPlayer = 1 - currentPlayer;
 		invh.SetCurrentPlayer(currentPlayer);
+		ah.SwitchTracks();
 	}
 }
