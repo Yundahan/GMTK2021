@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileMovement : MonoBehaviour
 {
 	public Tilemap tilemap;
+	public InventoryHandler invh;
 	
 	String[] impassableTiles = {"wall", "W Birke oben", "W Birke unten", "W Eiche oben Rechts", "W Eiche oben links", "W Eiche unten rechts", "W Eiche unten links", "W Steinchen", "W Buschi", "Birke oben", "Birke unten", "Eiche links oben", "Eiche links unten", "Eiche rechts oben", "Eiche rechts unten", "Steinchen", "Wasser", "Buschi", "Großer Stein", "W großer Stein", "W Hugellupf"};
 	
@@ -51,6 +52,11 @@ public class TileMovement : MonoBehaviour
 		{
 			if(tb.name == tile)
 			{
+				if(tb.name == "Wasser" && invh.IsItemInInventory(gameObject.name, "Floss"))
+				{
+					return true;
+				}
+				
 				return false;
 			}
 		}

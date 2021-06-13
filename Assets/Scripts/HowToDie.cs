@@ -14,6 +14,7 @@ public class HowToDie : MonoBehaviour
 	public Text message;
 	public Counter counter;
 	public MovementController mc;
+	public AudioHandler ah;
 	
 	String deathMessage;
 	String[] deadlyTerrain = {"Große Dornenhecke", "Kleine Dornenhecke", "W Eisspitzen"};
@@ -24,7 +25,7 @@ public class HowToDie : MonoBehaviour
     void Start()
     {
 		message.enabled = false;
-        message.text = "You died. Press Space to return to last checkpoint.";
+        message.text = "You died. \n Press Space to return to last checkpoint.";
     }
 	
     // Update is called once per frame
@@ -73,9 +74,11 @@ public class HowToDie : MonoBehaviour
 		
 		if(isDeadS || isDeadW)
 		{
+			ah.PlayClip(0);
 			playerS.SetRooted(true);
 			playerW.SetRooted(true);
 			message.enabled = true;
 		}
+ 
 	}
 }

@@ -63,9 +63,9 @@ public class InventoryHandler : MonoBehaviour
 		obj.GetComponent<RectTransform>().SetParent(rt);
 		obj.SetActive(true);
 		img.enabled = ((Image)(rt.gameObject.GetComponent<Image>())).enabled;
-		obj.GetComponent<RectTransform>().transform.position = rt.transform.position + new Vector3(0f, 1.5f - offset, 0f);
-		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0.6f);
-		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0.6f);
+		obj.GetComponent<RectTransform>().transform.position = rt.transform.position + new Vector3(offset * 1.4f - 0.7f, 0f, 0f);
+		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1f);
+		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1f);
 	}
 	
 	public bool IsItemInInventory(String playerName, String itemName)//item is in inventory of player p if it is in inventoryp or the players are connected and it is in the other inventory

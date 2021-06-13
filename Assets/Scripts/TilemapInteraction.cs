@@ -9,6 +9,7 @@ public class TilemapInteraction : MonoBehaviour
 	public Tilemap tilemap;
 	public InventoryHandler invh;
 	public TileMovement[] players = new TileMovement[2];
+	public AudioHandler ah;
 	
 	Dictionary<String, String> interactionDict = new Dictionary<String, String>{{"Kleine Dornenhecke", "Schere"}, {"Große Dornenhecke", "Schere"}, {"W Eisspitzen", "Fackel"}, {"W Steinchen", "Spitzhacke"}, {"Steinchen", "Spitzhacke"}};//this dictionary holds pairs of (tile type, item for tile type)
 	
@@ -58,6 +59,21 @@ public class TilemapInteraction : MonoBehaviour
 			if(invh.IsItemInInventory(playerName, requiredItem))
 			{
 				int index = FindStringInList(tbrList, tb.name);
+				
+				if(requiredItem=="Schere")
+				{
+					ah.PlayClip(3);
+				}
+				
+				if(requiredItem=="Fackel")
+				{
+					ah.PlayClip(5);
+				}
+				
+				if(requiredItem=="Spitzhacke")
+				{
+					ah.PlayClip(4);
+				}
 				
 				if(index == -1)
 				{
