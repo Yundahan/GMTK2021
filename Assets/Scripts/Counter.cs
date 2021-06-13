@@ -14,6 +14,7 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		counter = counterStart;
         text = (Text)gameObject.GetComponent<Text>();
 		text.enabled = false;
     }
@@ -40,6 +41,7 @@ public class Counter : MonoBehaviour
 	
 	public void EndCounter()
 	{
+		counter = counterStart;
 		text.enabled = false;
 	}
 	

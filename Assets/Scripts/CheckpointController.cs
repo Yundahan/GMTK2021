@@ -6,6 +6,7 @@ public class CheckpointController : MonoBehaviour
 {
 	public TileMovement playerS;
 	public TileMovement playerW;
+	public Counter counter;
 	
 	Vector2Int[] cpPositionsS = {new Vector2Int(2, 0), new Vector2Int(2, 1), new Vector2Int(2, 2), new Vector2Int(2, 3)};
 	Vector2Int[] cpPositionsW = {};
@@ -49,9 +50,10 @@ public class CheckpointController : MonoBehaviour
 		playerW.UpdateData();
 	}
 	
-	void Reset()
+	public void Reset()
 	{
 		playerS.Reset();
 		playerW.Reset();
+		counter.EndCounter();
 	}
 }

@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
 	public InventoryHandler invh;
 	public CameraBehaviour camera;
 	public Counter counter;
+	public HowToDie displayD;
 	
 	//scene constants
 	Vector2Int offset = new Vector2Int(0, 0);
@@ -51,16 +52,19 @@ public class MovementController : MonoBehaviour
 				playerS.FinishLastMove();
 				playerW.FinishLastMove();
 				UpdateItems();
+				displayD.displayDeathMessage();
 			}
 			else if(playerS.IsMoving())
 			{
 				playerS.FinishLastMove();
 				UpdateItems();
+				displayD.displayDeathMessage();
 			}
 			else if(playerW.IsMoving())
 			{
 				playerW.FinishLastMove();
 				UpdateItems();
+				displayD.displayDeathMessage();
 			}
 		
 			if(!connected)
