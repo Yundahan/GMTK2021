@@ -13,9 +13,10 @@ public class HowToDie : MonoBehaviour
 	public TileMovement playerW;
 	public Text message;
 	public Counter counter;
+	public MovementController mc;
 	
 	String deathMessage;
-	String[] deadlyTerrain = {"fire", "thorns"};
+	String[] deadlyTerrain = {"Große Dornenhecke", "Kleine Dornenhecke", "W Eisspitzen"};
 	bool isDeadS = false;
 	bool isDeadW = false;
 	
@@ -65,7 +66,7 @@ public class HowToDie : MonoBehaviour
 		isDeadS = Death(playerS.GetIntPos());
 		isDeadW = Death(playerW.GetIntPos());
 		
-		if(counter.GetCounter() <= 0)
+		if(counter.GetCounter() <= 0 && !mc.GetConnected())
 		{
 			isDeadS = true;
 		}

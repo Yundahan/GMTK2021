@@ -10,6 +10,7 @@ public class CheckpointController : MonoBehaviour
 	public MovementController mc;
 	public Counter counter;
 	public CameraBehaviour camerab;
+	public TilemapInteraction ti;
 	
 	bool cpIfConnected = false;
 	
@@ -77,6 +78,9 @@ public class CheckpointController : MonoBehaviour
 	{
 		playerS.UpdateData();
 		playerW.UpdateData();
+		invh.UpdateData();
+		counter.UpdateData();
+		ti.UpdateData();
 		
 		foreach(Item item in items)
 		{
@@ -88,7 +92,10 @@ public class CheckpointController : MonoBehaviour
 	{
 		playerS.Reset();
 		playerW.Reset();
-		counter.EndCounter();
+		invh.Reset();
+		counter.Reset();
+		ti.Reset();
+		counter.EndDCCounter();
 		mc.Reset();
 		
 		foreach(Item item in items)

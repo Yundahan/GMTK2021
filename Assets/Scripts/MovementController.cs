@@ -51,6 +51,7 @@ public class MovementController : MonoBehaviour
 			{
 				playerS.FinishLastMove();
 				playerW.FinishLastMove();
+				counter.UpdateCounter();
 				UpdateItems();
 				displayD.DisplayDeathMessage();
 			}
@@ -77,7 +78,7 @@ public class MovementController : MonoBehaviour
 					playerS.SetRooted(false);
 					playerW.SetRooted(false);
 					torch.enabled = false;
-					counter.EndCounter();
+					counter.EndDCCounter();
 				}
 			}
 			
@@ -125,7 +126,7 @@ public class MovementController : MonoBehaviour
 			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
 			lastMovement = Time.time;
 			camerab.SwitchCamera();
-			counter.ActivateCounter();
+			counter.ActivateDCCounter();
 		}
 		
 		if(!playerS.CanMoveInDirection(direction, ops) && playerW.CanMoveInDirection(direction, ops))//only W can move
@@ -136,7 +137,7 @@ public class MovementController : MonoBehaviour
 			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
 			lastMovement = Time.time;
 			camerab.SwitchCamera();
-			counter.ActivateCounter();
+			counter.ActivateDCCounter();
 		}
 		
 		return false;

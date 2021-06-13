@@ -18,11 +18,6 @@ public class CameraBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.S))//switch camera from one player to the other
-		{
-			SwitchCamera();
-		}
-		
 		transform.position = players[currentPlayer].transform.position + new Vector3(0f, 0f, -10f);
     }
 	

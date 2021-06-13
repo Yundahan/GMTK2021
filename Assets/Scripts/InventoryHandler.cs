@@ -16,10 +16,14 @@ public class InventoryHandler : MonoBehaviour
 	List<String> inventoryS = new List<String>();
 	List<String> inventoryW = new List<String>();
 	
+	String resetCurrentPlayer;
+	List<String> resetInventoryS = new List<String>();
+	List<String> resetInventoryW = new List<String>();
+	
     // Start is called before the first frame update
     void Start()
     {
-		
+		UpdateData();
     }
 
     // Update is called once per frame
@@ -192,5 +196,32 @@ public class InventoryHandler : MonoBehaviour
 		}
 		
 		UpdateInventoryVisibility();
+	}
+	
+	public void CopyStringList(List<String> list, List<String> copy)
+	{
+		copy.Clear();
+		
+		foreach(String s in list)
+		{
+			copy.Add(String.Copy(s));
+		}
+	}
+	
+	public void UpdateData()
+	{
+		CopyStringList(inventoryS, resetInventoryS);
+		CopyStringList(inventoryW, resetInventoryW);
+		resetCurrentPlayer = currentPlayer;
+	}
+	
+	public void Reset()
+	{
+		CopyStringList(resetInventoryS, inventoryS);
+		CopyStringList(resetInventoryW, inventoryW);
+		currentPlayer = resetCurrentPlayer;
+		ShowInventory("PlayerS");
+		ShowInventory("PlayerW");
+		connected = true;
 	}
 }
