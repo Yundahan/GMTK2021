@@ -12,8 +12,9 @@ public class HowToDie : MonoBehaviour
 	public TileMovement playerS;
 	public TileMovement playerW;
 	public Text message;
-	public String deathMessage;
 	public Counter counter;
+	
+	String deathMessage;
 	String[] deadlyTerrain = {"fire", "thorns"};
 	bool isDeadS = false;
 	bool isDeadW = false;
@@ -24,6 +25,21 @@ public class HowToDie : MonoBehaviour
 		message.enabled = false;
         message.text = "You died. Press Space to return to last checkpoint.";
     }
+	
+    // Update is called once per frame
+    void Update()
+    {
+        if((isDeadS || isDeadW) && Input.GetKey(KeyCode.Space))
+        {
+			message.enabled = false;
+			isDeadS = false;
+			isDeadW = false;
+			cpc.Reset();
+			playerS.SetRooted(false);
+			playerW.SetRooted(false);
+        }
+    }
+	
 	public bool Death(Vector2Int intPos)
 	{	
 		Vector3Int gridPos = new Vector3Int(intPos.x, intPos.y, 0);
@@ -46,6 +62,14 @@ public class HowToDie : MonoBehaviour
 	
 	public void DisplayDeathMessage()
 	{
+		isDeadS = Death(playerS.GetIntPos());
+		isDeadW = Death(playerW.GetIntPos());
+		
+		if(counter.GetCounter() <= 0)
+		{
+			isDeadS = true;
+		}
+		
 		if(isDeadS || isDeadW)
 		{
 			playerS.SetRooted(true);
@@ -53,25 +77,4 @@ public class HowToDie : MonoBehaviour
 			message.enabled = true;
 		}
 	}
-    // Update is called once per frame
-    void Update()
-    {
-		
-		isDeadS = Death(playerS.GetIntPos());
-		isDeadW = Death(playerW.GetIntPos());
-		if(counter.GetCounter() <= 0)
-		{
-			isDeadS = true;
-		}
-		
-        if((isDeadS || isDeadW) && Input.GetKey(KeyCode.Space))
-        {
-			message.enabled = false;
-			isDeadS = false;
-			isDeadW = false;
-			cpc.Reset();
-			playerS.SetRooted(false);
-			playerW.SetRooted(false);
-        }
-    }
 }

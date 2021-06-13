@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class TileMovement : MonoBehaviour
 {
-	float v;
-	
 	public Tilemap tilemap;
 	
 	String[] impassableTiles = {"wall", "Wasser"};
@@ -19,11 +17,13 @@ public class TileMovement : MonoBehaviour
 	Vector3 velocity;
 	
 	bool rooted = false;
+	float v;
 	
     // Start is called before the first frame update
     void Start()
     {
 		intPos = new Vector2Int((int)Math.Round(transform.position.x ), (int)Math.Round(transform.position.y));
+		UpdateData();
     }
 
     // Update is called once per frame
@@ -104,6 +104,7 @@ public class TileMovement : MonoBehaviour
 		velocity = new Vector3(0f, 0f, 0f);
 		intPos = resetPos;
 		transform.position = new Vector3(intPos.x, intPos.y, 0f);
+		rooted = false;
 	}
 	
 	public void SetV(float value)

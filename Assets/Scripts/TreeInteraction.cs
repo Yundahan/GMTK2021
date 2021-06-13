@@ -16,11 +16,22 @@ public class TreeInteraction : MonoBehaviour
     {	
 		sr = gameObject.GetComponent<SpriteRenderer>();
     }
+	
+	// Update is called once per frame
+    void Update()
+    {
+		if(Input.GetKeyDown(KeyCode.E)) //if E is pressed check whether interaction is possible then do it.	
+		{ 
+			if(TargetAccessible())
+			{
+				InteractionTree();
+			}
+		}
+    }
 
     void InteractionTree()
 	{
 		sr.sprite = deadTree;
-		
 	}
 	
 	/*bool IsInArray(Vector2Int a, Vector2Int[] b)
@@ -51,16 +62,4 @@ public class TreeInteraction : MonoBehaviour
 		
 		return false;
 	}
-		// Update is called once per frame
-    void Update()
-    {
-		
-		if(Input.GetKeyDown(KeyCode.E)) //if E is pressed check whether interaction is possible then do it.	
-		{ 
-			if(TargetAccessible())
-			{
-				InteractionTree();
-			}
-		}
-    }
 }
