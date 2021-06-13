@@ -60,17 +60,17 @@ public class TilemapInteraction : MonoBehaviour
 			{
 				int index = FindStringInList(tbrList, tb.name);
 				
-				if(requiredItem=="Schere")
+				if(requiredItem == "Schere")
 				{
 					ah.PlayClip(3);
 				}
 				
-				if(requiredItem=="Fackel")
+				if(requiredItem == "Fackel")
 				{
 					ah.PlayClip(5);
 				}
 				
-				if(requiredItem=="Spitzhacke")
+				if(requiredItem == "Spitzhacke")
 				{
 					ah.PlayClip(4);
 				}
