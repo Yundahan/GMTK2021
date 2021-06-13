@@ -213,6 +213,16 @@ public class InventoryHandler : MonoBehaviour
 		CopyStringList(inventoryS, resetInventoryS);
 		CopyStringList(inventoryW, resetInventoryW);
 		resetCurrentPlayer = currentPlayer;
+	}
+	
+	public void Reset()
+	{
+		CopyStringList(resetInventoryS, inventoryS);
+		CopyStringList(resetInventoryW, inventoryW);
+		currentPlayer = resetCurrentPlayer;
+		ShowInventory("PlayerS");
+		ShowInventory("PlayerW");
+		connected = true;
 		
 		foreach(Transform child in Sinv.transform)
 		{
@@ -232,15 +242,5 @@ public class InventoryHandler : MonoBehaviour
 				GameObject.Destroy(child.gameObject);
 			}
 		}
-	}
-	
-	public void Reset()
-	{
-		CopyStringList(resetInventoryS, inventoryS);
-		CopyStringList(resetInventoryW, inventoryW);
-		currentPlayer = resetCurrentPlayer;
-		ShowInventory("PlayerS");
-		ShowInventory("PlayerW");
-		connected = true;
 	}
 }

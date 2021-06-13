@@ -10,7 +10,7 @@ public class TilemapInteraction : MonoBehaviour
 	public InventoryHandler invh;
 	public TileMovement[] players = new TileMovement[2];
 	
-	Dictionary<String, String> interactionDict = new Dictionary<String, String>{{"Kleine Dornenhecke", "Schere"}, {"Große Dornenhecke", "Schere"}, {"W Eisspitzen", "Fackel"}};//this dictionary holds pairs of (tile type, item for tile type)
+	Dictionary<String, String> interactionDict = new Dictionary<String, String>{{"Kleine Dornenhecke", "Schere"}, {"Große Dornenhecke", "Schere"}, {"W Eisspitzen", "Fackel"}, {"W Steinchen", "Spitzhacke"}, {"Steinchen", "Spitzhacke"}};//this dictionary holds pairs of (tile type, item for tile type)
 	
 	public List<String> tbrList = new List<String>();//list of tiles to be replaced
 	public List<TileBase> rList = new List<TileBase>();//list of their replacements
