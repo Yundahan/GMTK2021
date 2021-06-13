@@ -41,7 +41,6 @@ public class Counter : MonoBehaviour
 			camerab.SwitchCamera();
 			startPos = playerS.GetIntPos();
 			counter = counterStart;
-			Debug.Log("counter = counterstart");
 		}
 		
         text.text = counter.ToString();
@@ -53,20 +52,16 @@ public class Counter : MonoBehaviour
 		{
 			text.color = Color.red;
 			counter = dccounterStart;
-			Debug.Log("counter = dccounterstart");
 			connected = false;
 		}
 		else
 		{
-			
-		Debug.Log("counter--");
 			counter--;
 		}
 	}
 	
 	public void EndDCCounter()
 	{
-		Debug.Log("counter = Counterstart");
 		text.color = Color.black;
 		connected = true;
 		counter = counterStart;
@@ -75,7 +70,6 @@ public class Counter : MonoBehaviour
 	
 	public void UpdateCounter()
 	{
-		Debug.Log("UpdateCounter");
 		Vector2Int intPos = playerS.GetIntPos();
 		counter = counterStart - Math.Abs(intPos.x - startPos.x) - Math.Abs(intPos.y - startPos.y);
 	}

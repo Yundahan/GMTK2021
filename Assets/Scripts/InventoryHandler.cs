@@ -213,6 +213,25 @@ public class InventoryHandler : MonoBehaviour
 		CopyStringList(inventoryS, resetInventoryS);
 		CopyStringList(inventoryW, resetInventoryW);
 		resetCurrentPlayer = currentPlayer;
+		
+		foreach(Transform child in Sinv.transform)
+		{
+			Image img = (Image)(child.GetComponent<Image>());
+			
+			if(!inventoryS.Contains(img.sprite.name))
+			{
+				GameObject.Destroy(child.gameObject);
+			}
+		}
+		foreach(Transform child in Winv.transform)
+		{
+			Image img = (Image)(child.GetComponent<Image>());
+			
+			if(!inventoryW.Contains(img.sprite.name))
+			{
+				GameObject.Destroy(child.gameObject);
+			}
+		}
 	}
 	
 	public void Reset()

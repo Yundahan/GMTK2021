@@ -25,7 +25,7 @@ public class AudioHandler : MonoBehaviour
         if(timeSinceSwitch <= switchDuration)
 		{
 			sources[current].volume = timeSinceSwitch;
-			sources[1 - current].volume = 1 - timeSinceSwitch;
+			sources[1 - current].volume = switchDuration - timeSinceSwitch;
 		}
     }
 	
