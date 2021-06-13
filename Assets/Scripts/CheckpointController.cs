@@ -6,7 +6,14 @@ public class CheckpointController : MonoBehaviour
 {
 	public TileMovement playerS;
 	public TileMovement playerW;
+	public InventoryHandler invh;
+	public MovementController mc;
 	public Counter counter;
+	public CameraBehaviour camerab;
+	
+	bool cpIfConnected = false;
+	
+	Item[] items;
 	
 	Vector2Int[] cpPositionsS = {new Vector2Int(2, 0), new Vector2Int(2, 1), new Vector2Int(2, 2), new Vector2Int(2, 3)};
 	Vector2Int[] cpPositionsW = {};
@@ -14,7 +21,7 @@ public class CheckpointController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		
+		items = (Item[])FindObjectsOfType(typeof(Item));
     }
 
     // Update is called once per frame
@@ -25,11 +32,25 @@ public class CheckpointController : MonoBehaviour
 			Reset();
 		}
 		
+		if(mc.GetConnected() && cpIfConnected)
+		{
+			cpIfConnected = false;
+			UpdateCheckpoint();
+		}
+		
         foreach(Vector2Int cpPosition in cpPositionsS)
 		{
 			if(cpPosition == playerS.GetIntPos())
 			{
-				UpdateCheckpoint();
+				if(!mc.GetConnected())//cant cp if not connected
+				{
+					cpIfConnected = true;
+				}
+				else
+				{
+					UpdateCheckpoint();
+				}
+				
 				return;
 			}
 		}
@@ -38,7 +59,15 @@ public class CheckpointController : MonoBehaviour
 		{
 			if(cpPosition == playerW.GetIntPos())
 			{
-				UpdateCheckpoint();
+				if(!mc.GetConnected())//cant cp if not connected
+				{
+					cpIfConnected = true;
+				}
+				else
+				{
+					UpdateCheckpoint();
+				}
+				
 				return;
 			}
 		}
@@ -48,6 +77,11 @@ public class CheckpointController : MonoBehaviour
 	{
 		playerS.UpdateData();
 		playerW.UpdateData();
+		
+		foreach(Item item in items)
+		{
+			item.UpdateData();
+		}
 	}
 	
 	public void Reset()
@@ -55,5 +89,11 @@ public class CheckpointController : MonoBehaviour
 		playerS.Reset();
 		playerW.Reset();
 		counter.EndCounter();
+		mc.Reset();
+		
+		foreach(Item item in items)
+		{
+			item.Reset();
+		}
 	}
 }

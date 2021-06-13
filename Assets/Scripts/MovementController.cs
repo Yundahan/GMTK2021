@@ -14,7 +14,7 @@ public class MovementController : MonoBehaviour
 	
 	//scene constants
 	Vector2Int offset = new Vector2Int(0, 0);
-	public float movementCD = 0.5f;
+	public float movementCD = 0.25f;
 	List<Vector2Int> ops = new List<Vector2Int>();
 	
 	float lastMovement;
@@ -171,6 +171,12 @@ public class MovementController : MonoBehaviour
 		{
 			item.CheckPlayerPositions();
 		}
+	}
+	
+	public void Reset()
+	{
+		connected = true;
+		torch.enabled = false;
 	}
 	
 	public bool GetConnected()

@@ -8,6 +8,8 @@ public class Item : MonoBehaviour
 	public InventoryHandler inv;
 	
 	bool active = true;
+	bool resetActive;
+	bool resetEnabled = true;
 	
 	TileMovement[] players;
 	Vector2Int intPos;
@@ -17,6 +19,7 @@ public class Item : MonoBehaviour
     {
 		intPos = new Vector2Int((int)Math.Round(transform.position.x), (int)Math.Round(transform.position.y));
 		players = (TileMovement[])FindObjectsOfType(typeof(TileMovement));
+		UpdateData();
     }
 
     // Update is called once per frame
@@ -44,5 +47,17 @@ public class Item : MonoBehaviour
 				active = false;
 			}
 		}
+	}
+	
+	public void UpdateData()
+	{
+		resetActive = active;
+		resetEnabled = ((SpriteRenderer)gameObject.GetComponent(typeof(SpriteRenderer))).enabled;
+	}
+	
+	public void Reset()
+	{
+		active = resetActive;
+		((SpriteRenderer)gameObject.GetComponent(typeof(SpriteRenderer))).enabled = resetEnabled;
 	}
 }
