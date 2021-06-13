@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioHandler : MonoBehaviour
 {
 	public AudioSource[] sources = new AudioSource[2];//summer is 0, winter is 1
+	public AudioSource[] sfx = new AudioSource[6];//0 is death, 1 is disconnect, 2 is reconnect, 3 is cutting, 4 is pickaxe, 5 is melting
 	
 	public float switchDuration = 0.5f;
 	public float baseVolume = 0.5f;
@@ -15,6 +16,12 @@ public class AudioHandler : MonoBehaviour
     void Start()
     {
         lastSwitch = -switchDuration;
+		
+		foreach(AudioSource s in sfx)
+		{
+			s.volume = 0;
+			s.loop = false;
+		}
     }
 
     // Update is called once per frame
@@ -41,5 +48,11 @@ public class AudioHandler : MonoBehaviour
 		{
 			SwitchTracks();
 		}
+	}
+	
+	public void PlayClip(int clipNumber)
+	{
+		sfx[clipNumber].volume = baseVolume;
+		sfx[clipNumber].Play();
 	}
 }
