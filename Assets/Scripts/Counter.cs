@@ -36,14 +36,15 @@ public class Counter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = counter.ToString();
-		
 		if(counter == 0)
 		{
 			camerab.SwitchCamera();
 			startPos = playerS.GetIntPos();
 			counter = counterStart;
+			Debug.Log("counter = counterstart");
 		}
+		
+        text.text = counter.ToString();
     }
 	
 	public void ActivateDCCounter()
@@ -52,23 +53,29 @@ public class Counter : MonoBehaviour
 		{
 			text.color = Color.red;
 			counter = dccounterStart;
+			Debug.Log("counter = dccounterstart");
 			connected = false;
 		}
 		else
 		{
+			
+		Debug.Log("counter--");
 			counter--;
 		}
 	}
 	
 	public void EndDCCounter()
 	{
+		Debug.Log("counter = Counterstart");
 		text.color = Color.black;
 		connected = true;
 		counter = counterStart;
+		startPos = playerS.GetIntPos();
 	}
 	
 	public void UpdateCounter()
 	{
+		Debug.Log("UpdateCounter");
 		Vector2Int intPos = playerS.GetIntPos();
 		counter = counterStart - Math.Abs(intPos.x - startPos.x) - Math.Abs(intPos.y - startPos.y);
 	}

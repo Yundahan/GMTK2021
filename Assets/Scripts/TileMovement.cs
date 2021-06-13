@@ -8,7 +8,7 @@ public class TileMovement : MonoBehaviour
 {
 	public Tilemap tilemap;
 	
-	String[] impassableTiles = {"wall", "W Wasser", "W Birke oben", "W Birke unten", "W Eiche oben Rechts", "W Eiche oben links", "W Eiche unten rechts", "W Eiche unten links", "W Steinchen", "W Buschi", "Birke oben", "Birke unten", "Eiche links oben", "Eiche links unten", "Eiche rechts oben", "Eiche rechts unten", "Steinchen", "Wasser", "Buschi", "Großer Stein", "W Großer Stein", "W Hugellupf"};
+	String[] impassableTiles = {"wall", "W Birke oben", "W Birke unten", "W Eiche oben Rechts", "W Eiche oben links", "W Eiche unten rechts", "W Eiche unten links", "W Steinchen", "W Buschi", "Birke oben", "Birke unten", "Eiche links oben", "Eiche links unten", "Eiche rechts oben", "Eiche rechts unten", "Steinchen", "Wasser", "Buschi", "Großer Stein", "W Großer Stein", "W Hugellupf"};
 	
 	Vector2Int intPos = new Vector2Int(0, 0);
 	Vector2Int resetPos;
