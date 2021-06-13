@@ -6,8 +6,8 @@ public class AudioHandler : MonoBehaviour
 {
 	public AudioSource[] sources = new AudioSource[2];//summer is 0, winter is 1
 	
-	public float switchDuration = 1f;
-	public float baseVolume = 1f;
+	public float switchDuration = 0.5f;
+	public float baseVolume = 0.5f;
 	float lastSwitch;
 	int current = 0;
 	
@@ -32,5 +32,6 @@ public class AudioHandler : MonoBehaviour
 	public void SwitchTracks()
 	{
 		current = 1 - current;
+		lastSwitch = Time.time;
 	}
 }
