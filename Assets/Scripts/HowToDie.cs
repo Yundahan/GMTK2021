@@ -44,7 +44,7 @@ public class HowToDie : MonoBehaviour
 		return false;
 	}
 	
-	public void displayDeathMessage()
+	public void DisplayDeathMessage()
 	{
 		if(isDeadS || isDeadW)
 		{

@@ -8,7 +8,7 @@ public class MovementController : MonoBehaviour
 	public TileMovement playerW;
 	public SpriteRenderer torch;
 	public InventoryHandler invh;
-	public CameraBehaviour camera;
+	public CameraBehaviour camerab;
 	public Counter counter;
 	public HowToDie displayD;
 	
@@ -52,19 +52,19 @@ public class MovementController : MonoBehaviour
 				playerS.FinishLastMove();
 				playerW.FinishLastMove();
 				UpdateItems();
-				displayD.displayDeathMessage();
+				displayD.DisplayDeathMessage();
 			}
 			else if(playerS.IsMoving())
 			{
 				playerS.FinishLastMove();
 				UpdateItems();
-				displayD.displayDeathMessage();
+				displayD.DisplayDeathMessage();
 			}
 			else if(playerW.IsMoving())
 			{
 				playerW.FinishLastMove();
 				UpdateItems();
-				displayD.displayDeathMessage();
+				displayD.DisplayDeathMessage();
 			}
 		
 			if(!connected)
@@ -124,7 +124,7 @@ public class MovementController : MonoBehaviour
 			playerW.SetRooted(true);
 			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
 			lastMovement = Time.time;
-			camera.SwitchCamera();
+			camerab.SwitchCamera();
 			counter.ActivateCounter();
 		}
 		
@@ -135,7 +135,7 @@ public class MovementController : MonoBehaviour
 			playerS.SetRooted(true);
 			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
 			lastMovement = Time.time;
-			camera.SwitchCamera();
+			camerab.SwitchCamera();
 			counter.ActivateCounter();
 		}
 		
