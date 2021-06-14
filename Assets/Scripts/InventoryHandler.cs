@@ -63,7 +63,7 @@ public class InventoryHandler : MonoBehaviour
 		obj.GetComponent<RectTransform>().SetParent(rt);
 		obj.SetActive(true);
 		img.enabled = ((Image)(rt.gameObject.GetComponent<Image>())).enabled;
-		obj.GetComponent<RectTransform>().transform.position = rt.transform.position + new Vector3(offset * 1.4f - 0.7f, 0f, 0f);
+		obj.GetComponent<RectTransform>().transform.position = rt.transform.position + new Vector3(offset * 1.5f - 0.75f, 0f, 0f);
 		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1f);
 		obj.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1f);
 	}

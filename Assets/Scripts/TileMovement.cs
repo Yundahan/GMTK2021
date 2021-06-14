@@ -22,9 +22,15 @@ public class TileMovement : MonoBehaviour
 	bool rooted = false;
 	float v;
 	
+	Animator animator;
+	SpriteRenderer sr;
+	
     // Start is called before the first frame update
     void Start()
     {
+		animator = (Animator)gameObject.GetComponent<Animator>();
+		sr = (SpriteRenderer)gameObject.GetComponent<SpriteRenderer>();
+		animator.enabled = false;
 		intPos = new Vector2Int((int)Math.Round(transform.position.x ), (int)Math.Round(transform.position.y));
 		UpdateData();
     }
@@ -76,6 +82,7 @@ public class TileMovement : MonoBehaviour
 	
 	public void Move(Vector2Int direction)
 	{
+		animator.enabled = true;
 		TurnInDirection(direction);
 		velocity = new Vector3(v * direction.x, v * direction.y, 0f);
 	}
@@ -92,6 +99,7 @@ public class TileMovement : MonoBehaviour
 	
 	public void FinishLastMove()
 	{
+		animator.enabled = false;
 		velocity = new Vector3(0f, 0f, 0f);
 		intPos = new Vector2Int((int)Math.Round(transform.position.x), (int)Math.Round(transform.position.y));
 		transform.position = new Vector3((float)intPos.x, (float)intPos.y, 0f);//move was finished, round position to exactly match tiling
@@ -135,26 +143,29 @@ public class TileMovement : MonoBehaviour
 		if(!rooted)
 		{
 			direction = value;
-			SpriteRenderer sr = (SpriteRenderer)gameObject.GetComponent<SpriteRenderer>();
 			
 			if(direction.x == 1)
 			{
 				sr.sprite = sprites[1];
+				animator.SetInteger("dir", 0);
 				return;
 			}
 			if(direction.x == -1)
 			{
 				sr.sprite = sprites[3];
+				animator.SetInteger("dir", 1);
 				return;
 			}
 			if(direction.y == 1)
 			{
 				sr.sprite = sprites[0];
+				animator.SetInteger("dir", 3);
 				return;
 			}
 			if(direction.y == -1)
 			{
 				sr.sprite = sprites[2];
+				animator.SetInteger("dir", 2);
 				return;
 			}
 		}

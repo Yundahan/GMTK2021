@@ -8,7 +8,7 @@ public class AudioHandler : MonoBehaviour
 	public AudioSource[] sfx = new AudioSource[8];//0 is death, 1 is disconnect, 2 is reconnect, 3 is cutting, 4 is pickaxe, 5 is melting, 7 and 8 are steps
 	
 	public float switchDuration = 0.5f;
-	public float baseVolume = 0.5f;
+	public float baseVolume = 0.3f;
 	float lastSwitch;
 	int current = 0;
 	
@@ -19,7 +19,6 @@ public class AudioHandler : MonoBehaviour
 		
 		foreach(AudioSource s in sfx)
 		{
-			s.volume = 0;
 			s.loop = false;
 		}
     }
@@ -52,7 +51,6 @@ public class AudioHandler : MonoBehaviour
 	
 	public void PlayClip(int clipNumber)
 	{
-		sfx[clipNumber].volume = baseVolume;
 		sfx[clipNumber].Play();
 	}
 }
