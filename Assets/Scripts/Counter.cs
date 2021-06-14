@@ -36,7 +36,7 @@ public class Counter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if(counter == 0)
+		if(counter == 0 && connected)
 		{
 			camerab.SwitchCamera();
 			startPos = playerS.GetIntPos();

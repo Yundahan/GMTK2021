@@ -128,6 +128,7 @@ public class MovementController : MonoBehaviour
 			lastMovement = Time.time;
 			camerab.SwitchCamera();
 			counter.ActivateDCCounter();
+			displayD.DisplayDeathMessage();
 		}
 		
 		if(!playerS.CanMoveInDirection(direction, ops) && playerW.CanMoveInDirection(direction, ops))//only W can move
@@ -139,6 +140,7 @@ public class MovementController : MonoBehaviour
 			lastMovement = Time.time;
 			camerab.SwitchCamera();
 			counter.ActivateDCCounter();
+			displayD.DisplayDeathMessage();
 		}
 		
 		return false;

@@ -64,6 +64,11 @@ public class HowToDie : MonoBehaviour
 	
 	public void DisplayDeathMessage()
 	{
+		if(isDeadS || isDeadW)
+		{
+			return;
+		}
+		
 		isDeadS = Death(playerS.GetIntPos());
 		isDeadW = Death(playerW.GetIntPos());
 		
