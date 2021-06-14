@@ -16,8 +16,8 @@ public class CheckpointController : MonoBehaviour
 	
 	Item[] items;
 	
-	Vector2Int[] cpPositionsS = {new Vector2Int(0, 8), new Vector2Int(1, 8), new Vector2Int(-1, 8)};
-	Vector2Int[] cpPositionsW = {};
+	Vector2Int[] cpPositionsS = {new Vector2Int(56, 52), new Vector2Int(-29, 33), new Vector2Int(-2, 20), new Vector2Int(-1, 20), new Vector2Int(0, 20), new Vector2Int(-3, 49), new Vector2Int(-2, 49), new Vector2Int(-1, 49), new Vector2Int(0, 49), new Vector2Int(1, 49), new Vector2Int(2, 49), new Vector2Int(3, 49)};
+	Vector2Int[] cpPositionsW = {new Vector2Int(187, 85), new Vector2Int(232, 83)};
 	
     // Start is called before the first frame update
     void Start()
@@ -71,7 +71,6 @@ public class CheckpointController : MonoBehaviour
 	
 	void UpdateCheckpoint()
 	{
-		Debug.Log("Checkpoint Reached");
 		playerS.UpdateData();
 		playerW.UpdateData();
 		invh.UpdateData();

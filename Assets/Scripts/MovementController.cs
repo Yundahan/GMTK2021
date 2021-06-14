@@ -76,7 +76,6 @@ public class MovementController : MonoBehaviour
 				if(ArePositionsEqual())
 				{
 					SetConnected(true);
-					ah.PlayClip(2);
 					playerS.SetRooted(false);
 					playerW.SetRooted(false);
 					torch.enabled = false;
@@ -123,7 +122,6 @@ public class MovementController : MonoBehaviour
 		if(playerS.CanMoveInDirection(direction, ops) && !playerW.CanMoveInDirection(direction, ops))//only S can move
 		{
 			SetConnected(false);
-			ah.PlayClip(1);
 			playerS.Move(direction);
 			playerW.SetRooted(true);
 			torch.transform.position = new Vector3(playerW.transform.position.x - offset.x, playerW.transform.position.y - offset.y, 0f);
@@ -135,7 +133,6 @@ public class MovementController : MonoBehaviour
 		if(!playerS.CanMoveInDirection(direction, ops) && playerW.CanMoveInDirection(direction, ops))//only W can move
 		{
 			SetConnected(false);
-			ah.PlayClip(1);
 			playerW.Move(direction);
 			playerS.SetRooted(true);
 			torch.transform.position = new Vector3(playerS.transform.position.x + offset.x, playerS.transform.position.y + offset.y, 0f);
@@ -191,13 +188,19 @@ public class MovementController : MonoBehaviour
 	
 	public void SetConnected(bool value)
 	{
-		connected = value;
-		if(value){
-			ah.PlayClip(2);
-		}else
+		if(connected != value)
 		{
-			ah.PlayClip(1);
+			connected = value;
+			invh.SetConnected(value);
+			
+			if(connected)
+			{
+				ah.PlayClip(2);
+			}
+			else
+			{
+				ah.PlayClip(1);
+			}
 		}
-		invh.SetConnected(value);
 	}
 }

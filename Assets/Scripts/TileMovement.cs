@@ -9,6 +9,8 @@ public class TileMovement : MonoBehaviour
 	public Tilemap tilemap;
 	public InventoryHandler invh;
 	
+	public Sprite[] sprites = new Sprite[4];
+	
 	String[] impassableTiles = {"wall", "W Birke oben", "W Birke unten", "W Eiche oben Rechts", "W Eiche oben links", "W Eiche unten rechts", "W Eiche unten links", "W Steinchen", "W Buschi", "Birke oben", "Birke unten", "Eiche links oben", "Eiche links unten", "Eiche rechts oben", "Eiche rechts unten", "Steinchen", "Wasser", "Buschi", "Großer Stein", "W großer Stein", "W Hugellupf"};
 	
 	Vector2Int intPos = new Vector2Int(0, 0);
@@ -133,6 +135,28 @@ public class TileMovement : MonoBehaviour
 		if(!rooted)
 		{
 			direction = value;
+			SpriteRenderer sr = (SpriteRenderer)gameObject.GetComponent<SpriteRenderer>();
+			
+			if(direction.x == 1)
+			{
+				sr.sprite = sprites[1];
+				return;
+			}
+			if(direction.x == -1)
+			{
+				sr.sprite = sprites[3];
+				return;
+			}
+			if(direction.y == 1)
+			{
+				sr.sprite = sprites[0];
+				return;
+			}
+			if(direction.y == -1)
+			{
+				sr.sprite = sprites[2];
+				return;
+			}
 		}
 	}
 	
